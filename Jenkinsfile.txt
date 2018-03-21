@@ -1,0 +1,27 @@
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+    stages {
+        stage('compile') {
+            steps {
+                sh 'mvn -f /Users/AnilNiru/Documents/GitHub/my-app/pom.xml compile'
+                echo "Welcome to compile"
+            }
+        }
+    }
+
+    post {
+      always {
+        echo 'This will run'
+      }
+      success {
+        echo 'This will run only if successful'
+      }
+      failure {
+        echo 'This will run only if failed'
+      }
+    }
+}
